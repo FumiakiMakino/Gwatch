@@ -1,5 +1,6 @@
 # Gwatch
 Gwatch for the pipeline program for quick evaluation of sample quality in CryoEM 
+
 #はじめに
 
 このソフトは、単粒子像解析を行っているクライオ電顕ユーザ用に開発したpythonプログラムです。
@@ -17,14 +18,15 @@ Gwatch for the pipeline program for quick evaluation of sample quality in CryoEM
 また、ユーザが二次元平均像から三次元再構成がうまく行きそうかどうか判断できるという前提にも立っています。
 項目「判断に必要な枚数」で何枚ぐらいあればいいかをコメントしていますが、詳細については論文を書いている途中なので、もう少しお待ち下さい。
 
-
 #準備する物
+
 K2やダイレクトディテクターなどを制御しているクライオ電顕用PCに光ファイバーやギガビットイーサネットを介して接続しているGPGPUを準備してください。
 linux (ubuntuかcentOS)が載せてあれば動作可能で、GPUは二台以上積んであることが望ましいです。
 また、K2の場合は４つの光ファイバーのポートの内、一つが余っています。それを有効活用することをオススメします。
 
 
 #GPGPUに接続するHDDについて
+
 私たちの場合、HDDを直接GPGPUに接続し（裸◯のお立ち台などのHDDスタンドで）、sambaサーバを介して、クライオ電顕用PCとGPGPU用PCの両方からアクセス出来るように設定しています。 また、撮影した電顕写真は直接このHDDにコピーされるように設定しています。
 
 
