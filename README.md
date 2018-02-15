@@ -44,7 +44,7 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 python3, watchdog, pyqt5, numpy
 ```
 
-Ubuntuでのインストールについて(pip経由、16.04は確認済み)
+### Ubuntuでのインストールについて(pip経由、16.04は確認済み)
 1. Python3のインストール
 2. default (python3.5)
 Pipのインストール
@@ -73,7 +73,7 @@ $ sudo  python3 -m pip install pyqt5
 ```
 
 
-centOSでのインストールについて(pip経由、7は確認済み)
+### centOSでのインストールについて(pip経由、7は確認済み)
 1. python3.6のインストール
 ```
 $ sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
