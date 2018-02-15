@@ -102,7 +102,7 @@ $python3.6 -m pip install numpy
 
 ## Gwatchの使い方と機能について
 
-コンソールを立ち上げて、```Gwatch.py``` と打ち込む。
+コンソールを立ち上げて、```Gwatch_v32.py``` と打ち込む。
 
  ### Automatic MotionCor2について
  1. “Watching Directory”について。データがコピーされるディレクトリを選ぶ
