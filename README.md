@@ -130,10 +130,12 @@ micrograph_all_gwatch.starとして、relionで利用可能な形で出力され
 
 ### タブ Results について
 MotionCor2およびGctfの結果はmicrograph_all_gwatch.starから読み込み。
-“Defocus_U  Defocus_V  Angle   FoM  RationOfIcethinkness”の順に[Results of MotionCor2 and Gctf]に表示
+`“Defocus_U  Defocus_V  Angle   FoM  RationOfIcethinkness”` の順に[Results of MotionCor2 and Gctf]に表示
 2D-classification実行時のコマンドラインは
+
 [Commands For Auomatic 2D-classificaiton]で確認できる。また、監視ディレクトリ下のgwatch_cmd01.logに記録される
 その他状況は
+
 [status]で確認できる。それぞれのプログラムのエラーは赤文字表示される。
 
 ### settingファイルのsaveとopen
@@ -144,9 +146,8 @@ MotionCor2やGctf, Relion2の設定はsave settingを選ぶと記録されます
 - エラーで起動しない → ライブラリのインストールを確認。それでもダメなら、"rm -rf ~/.Gwatch_setting”で初期settingファイルの消去
 - たまに落ちる　→　Gwatchの再起動で解決
 - MotionCor2がうまく行かない　→ データのコピーが終了せずに実行した可能性がある。
-"""
-”Gwatch_v32.py -t <#time>” で起動する。
-"""
+`Gwatch_v32.py -t <#time>” で起動する。`
+
 <#time>は秒数、10などに設定するとよい。なぜなら、Gwatchはファイルの読み込み終了をファイルの増減を監視し判断しているため。インターバルタイムはdefaultだと5 secだが、10 secなど長く設定すると安全にコピー終了まで待つことができると考えられる。
 
 ## 今後実装予定の機能
