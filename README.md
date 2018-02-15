@@ -7,7 +7,7 @@ Gwatch: the pipeline program for quick evaluation of sample quality in CryoEM
 機能はとてもシンプルで、
 - 　任意のディレクトリを監視しコピー後すぐにMotionCor2, Gctfを行う（もしくはすでにあるスタックファイル）。
 - 　任意の枚数に達したら、Gautomatch, Particle extraction (by Relion2), 2D-classification (by Relion2)を行う。
-ここまでを一気に行うOn-the-fly Pipeline プログラムです。
+-   ここまでを一気に行うOn-the-fly Pipeline プログラムです。
 
 そもそも開発した理由が、出来る限り早く三次元再構成がうまく行きそうかどうか、高分解能到達可能かどうかを判断するためです。
 
