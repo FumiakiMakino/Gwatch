@@ -98,8 +98,10 @@ $python3.6 -m pip install numpy
 
 #### centOS6でのインストールについて(Yさんからのコメント)
 
-```CentOS6環境では，pipで入れるとpyqt5がglibcの新しい版(glibc 2.17以上)に依存しており
-動かない```
+```
+CentOS6環境では，pipで入れるとpyqt5がglibcの新しい版(glibc 2.17以上)に依存しており
+動かない
+```
 というコメントを頂きました。
 以下のサイトでglibcを更新することでpyqt5が動くようになります。
 https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
