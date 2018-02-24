@@ -104,7 +104,7 @@ CentOS6環境では，pipで入れるとpyqt5がglibcの新しい版(glibc 2.17�
 ```
 というコメントを頂きました。
 以下のサイトでglibcを更新することでpyqt5が動くようになります。
-[glibcの更新]https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
+[glibcの更新](https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174)
 
 
 ## インストール方法
