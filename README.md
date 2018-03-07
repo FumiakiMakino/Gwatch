@@ -117,9 +117,8 @@ https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
 
  ### Automatic MotionCor2について
  1. “Watching Directory”について。データがコピーされるディレクトリを選ぶ
- 2. “Watching File Name”について。ファイルの名前を打ち込む。このとき、ワイルドカードを使って名前を指定すること
-また、スタックがmrc形式のときは"*.mrc”を使うと再帰的にmotioncor2が起動するので注意し、必ず”?”を使用し、ファイル名を限定させること（tiffもしくはmrc以外でのセーブは非推奨）
-（例：file????.mrc, *.tiffなど）
+ 2. “Watching File Name”について。ファイルの名前を打ち込む。このとき、ワイルドカードを使って名前を指定すること（例：*.mrc, *.tiffなど）
+（tiffもしくはmrc以外でのセーブは非推奨）
  3. “Number of Frame”について。枚数の指定。シングルイメージとしてセーブされるデータに対してのみ有効。規定枚数に達したらnewstackでスタックデータを作成し、MotionCor2を起動します。（シングルイメージでのセーブは非推奨）
  4. “Do Gain-reference?” について。Gain referenceを使った補正をMotionCor2で行いたい場合はここで指定すること。YESを選んだら、”Name of Gain-Reference”からファイルを選ぶ。拡張子dm4のデータも自動で変換します。変換後は監視フォルダにgain.mrcとして保存される。
  5. “Do Measure Ice-thickness ratio?”について。YESを選ぶとエナジーフィルター有り無しの割合がmicrograph_all_gwatch.starの_rlnEnergyLossの行に記録される。その際、フィルターなしで撮影したファイルを”Name of Image without energy filter”のbrowseから一枚選ぶこと。ここではヘッダーに記録された強度から割合を求めている。
