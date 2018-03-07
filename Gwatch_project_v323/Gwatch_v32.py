@@ -19,7 +19,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #----------------------------------------------
-#       Gwatch.py (v3.2)
+#       Gwatch.py (v3.2.3)
 #               written by Fumiaki Makino
 #               since 2017.03.05
 # 
@@ -418,11 +418,15 @@ def cal_mot2(command,num,diameter,apix,kv,cs,frames,binn,cmdgctf,cmd2dcls):
     
     while list4cal: # Reading File
         fname=list4cal.pop(0)
-        
+        #print(fname)
         try:
-            cmdinfo="e2iminfo.py %s"%fname #reading header of file
-            #print(cmdinfo)
-            ret=subprocess.check_output(cmdinfo,shell=True).decode()
+            if str(getext(fname)) != ".raw":
+                cmdinfo="e2iminfo.py %s"%fname #reading header of file
+                ret=subprocess.check_output(cmdinfo,shell=True).decode()
+            else:
+                print(fname)
+                ret="0 1 2 3 4 5 6 7 8 9 10 dummy"
+                pass
         except:
             print("Error in file format %s"%fname)
             break
@@ -432,13 +436,23 @@ def cal_mot2(command,num,diameter,apix,kv,cs,frames,binn,cmdgctf,cmd2dcls):
             try:
                 c_name=os.path.splitext(fname)[-2][:-5]        #read file name except last 4 digits
                 c_extnum=int(os.path.splitext(fname)[-2][-4:]) #read last 4 digits
-                flg_single=1 # change flag for single image, when finishing single data copy, go to 0
             except:
-                print("Error in data %s"%fname)
-                break
+                pass
+            else:
+                flg_single=1 # change flag for single image, when finishing single data copy, go to 0
+
+            if(flg_single == 0):
+                try:
+                    c_name =os.path.splitext(fname)[-2][:-3]    #read file name except last 2 digits
+                    c_extnum=int(os.path.splitext(fname)[-2][-1:])+1
+                    flg_single=1
+                except:
+                    print("%s is single image or done MotionCor2"%fname)
+                    continue
+
             if (c_extnum==frames):   #In the case of finishing data reading
                 if not os.path.isfile("%s_SumCor.mrc"%(c_name)): #working in only new file
-                    cmd_new="newstack %s*.mrc %s.mrc"%(c_name,c_name)
+                    cmd_new="newstack %s* %s.mrc"%(c_name,c_name)
                     subprocess.check_call(cmd_new,shell=True)
                     fname=c_name
                     flg_single=0
@@ -450,12 +464,13 @@ def cal_mot2(command,num,diameter,apix,kv,cs,frames,binn,cmdgctf,cmd2dcls):
         if os.path.isfile("%s_SumCor.mrc"%(getwholename(fname))) and flg_single == 0:
             myapp.report_result_status("Done MotionCor2 and Gctf ==> %s"%(fname.split("/")[-1]),0)
         if not os.path.isfile("%s_SumCor.mrc"%(getwholename(fname))) and flg_single == 0:  #working in only new file
-            if ((str(getext(fname)) != ".mrc") and  (str(getext(fname)) != ".tiff") and (str(getext(fname)) != ".tif")):
-                cmd_trs="newstack %s %s.mrc"%(fname,getwholename(fname))
+            if ((str(getext(fname)) != ".mrc") and (str(getext(fname)) != ".mrcs") and  (str(getext(fname)) != ".tiff") and (str(getext(fname)) != ".tif")):
+                cmd_trs="newstack %s %s.mrcs"%(fname,getwholename(fname))
                 #cmd_rm="rm %s"%(event.src_path) #remove original image stack
                 subprocess.check_call(cmd_trs,shell=True)
                 print("Finished %s "%cmd_trs)
                 #subprocess.check_call(cmd_rm,shell=True)
+                fname=getwholename(fname)+".mrcs"
                 time.sleep(2)
                 
             cmd_gpu="-gpu %d"%(list4gpu[num4cls%prl])
@@ -466,7 +481,7 @@ def cal_mot2(command,num,diameter,apix,kv,cs,frames,binn,cmdgctf,cmd2dcls):
             if(getext(fname)==".tif" or getext(fname)==".tiff"):
                 cmd="`which MotionCor2` -InTiff %s -OutMrc %s_SumCor.mrc %s %s && %s && %s && %s"%(fname,getwholename(fname), command,cmd_gpu,cmd_gctf,cmd_gctflog,cmd_thum)
             else:
-                cmd="`which MotionCor2` -InMrc %s.mrc -OutMrc %s_SumCor.mrc %s %s && %s && %s && %s"%(getwholename(fname),getwholename(fname), command,cmd_gpu,cmd_gctf,cmd_gctflog,cmd_thum)
+                cmd="`which MotionCor2` -InMrc %s -OutMrc %s_SumCor.mrc %s %s && %s && %s && %s"%(fname,getwholename(fname), command,cmd_gpu,cmd_gctf,cmd_gctflog,cmd_thum)
             mot2_call(cmd,prl,fname)  
 	
         if((num4cls/(flag_con*num_bat+1))== num) and (num4cls !=0): #when number of micrographs reached to setting number, they calculate 2D classification
