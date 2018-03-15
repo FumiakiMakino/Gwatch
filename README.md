@@ -36,7 +36,7 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 - My program wraps these programs.
 - Be sure to use them in accordance with their terms of use and license.
 #### IMPORTANT!!
-- For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
+- For MotionCor2, Gautomatch, and Gctf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 
 ## Required python libraries (Only Ubuntu and CentOS confirmed):
@@ -110,7 +110,7 @@ Pyqt5 will work by updating glibc at the following site: https://gist.github.com
 ## Installation 
 1. Download Gwatch (git clone git://github.com/FumiakiMakino/Gwatch.git)
 2. Pass the path to the extracted folder
-- IMPORTANT!! For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
+- IMPORTANT!! For MotionCor2, Gautomatch, and Gctf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 ## About Gwatch Usage and Features
 
@@ -124,7 +124,7 @@ Launch the console and enter ```Gwatch_v32.py```
 5. "Do Measure Ice?": If YES, the percentage of electron transmission with/without the energy filter is recorded in the _rlnEneryLoss row of micrograph_all_ gwatch.star.  In that case, choose a file from the "Name of Image without energy filter" file that you recorded the image without filtering. Here, the ratio is determined from the intensity recorded in the header.
 6. "Additional Option For MotionCor2": This allows you to enter options for MotionCor2. Input all necessary items other than input and output or gain reference.
 7. "Which GPUs": Specify the GPU used here. Only one specification if not specified. In addition, when MotionCorr2 is used, one GPU is allocated per one process. The maximum is four processes on four GPUs. Why? Because it is faster!
-8. For "Pixel Size", "Cs", "Acceleration Voltage", enter the numbers required for calculating Gcf. If you change these, it works with the MotionCor 2 option above.
+8. For "Pixel Size", "Cs", "Acceleration Voltage", enter the numbers required for calculating Gctf. If you change these, it works with the MotionCor 2 option above.
 
 ### About Automatic 2D-classification
 
@@ -136,10 +136,10 @@ Launch the console and enter ```Gwatch_v32.py```
 6. "Run" and "Cancel": Press "Run" button to start Gwatch.
 Gwatch can run offline. Therefore it is possible to calculate it after several dozen images are collected. If the calculation failed, set it up again and press “Run ”. You need to select the watching directory again. "Cancel" button stops calculation. If MotionCor2 is running, the calculation will be continued.
 
-The result will be available for Relion as micrographs_all_gwatch.star. This format is almost the same as that in Gcf.
+The result will be available for Relion as micrographs_all_gwatch.star. This format is almost the same as that in Gctf.
 
 ### About Tabs Results
-The results of MotionCor2 and Gcf are read from micrograph_all_gwatch.star and display in [Results of MotionCor 2 and Gcf] in the order of `"Defocus_U Defus_V Angle FoM RationOfIcethinkness"`
+The results of MotionCor2 and Gctf are read from micrograph_all_gwatch.star and display in [Results of MotionCor 2 and Gctf] in the order of `"Defocus_U Defus_V Angle FoM RationOfIcethinkness"`
 
  The command lines at the 2D-classification runtime are displayed in [Commands For Auomatic 2D-classificaiton] and are recorded in gwatch_cmd01.log
  
@@ -148,7 +148,7 @@ The error in each program is displayed in red.
 
 ### Save and open in the setting file
 
-The settings for MotionCor2, Gcf, and Relon2 are recorded when save setting is selected. 
+The settings for MotionCor2, Gctf, and Relon2 are recorded when save setting is selected. 
 (The default is ~ / .Gwatch_setting in default.) You can open the setting file from open setting.
 
 ## Current Problems and Solutions
