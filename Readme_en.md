@@ -1,7 +1,7 @@
 # Gwatch
 Gwatch: a pipeline program for quick evaluation of sample quality in CryoEM 
 
-## Introduction
+## Overview
 This software is a python program developed for electron cryomicroscope (cryoEM) users collecting data for single-particle image analysis. 
 
 
