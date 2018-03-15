@@ -72,7 +72,7 @@ $ sudo  python3 -m pip install pyqt5
 
 
 ### centOSでのインストールについて(pip経由、7は確認済み、6は下記コメントを参照)
-1. python3.6のインストール
+python3.6のインストール
 ```
 $ sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 $ sudo yum search python36
