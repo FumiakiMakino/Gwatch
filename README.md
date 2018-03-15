@@ -155,7 +155,7 @@ The settings for MotionCor2, Gcf, and Relon2 are recorded when save setting is s
 
 - Do Not Launch → Verify library installation. If not, remove the initial setting file with "rm-rf ~ / .Gwatch _ setting" 
 - Crash occasionally → Restart Gwatch, start from continuation
-- MotionCor 2 does not work→ it is possible that the data transfer failed. Start with ```Gwatch _ v 32 .py -t <# time>```.
+- MotionCor 2 does not work→ it is possible that the data transfer failed. Start with ```Gwatch_v32.py -t <# time>```.
 
 <# time> should be set in seconds, such as 10 or 15. Although the default interval time is 5 seconds by default, since Gwatch monitors the increment of the file size, it would be safer to set a longer waiting time for completion of the data copy .
 
