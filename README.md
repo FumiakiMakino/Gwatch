@@ -1,180 +1,177 @@
 # Gwatch
-Gwatch: the pipeline program for quick evaluation of sample quality in CryoEM 
+Gwatch: a pipeline program for quick evaluation of sample quality in CryoEM 
 
-## はじめに
-
-このソフトは、単粒子像解析を行っているクライオ電顕ユーザ用に開発したpythonプログラムです。
-機能はとてもシンプルで、
-- 　任意のディレクトリを監視しコピー後すぐにMotionCor2, Gctfを行う（もしくはすでにあるスタックファイル）。
-- 　任意の枚数に達したら、Gautomatch, Particle extraction (by Relion2), 2D-classification (by Relion2)を行う。
-
-ここまでを一気に行うOn-the-fly Pipeline プログラムです。
-
-そもそも開発した理由が、出来る限り早く三次元再構成がうまく行きそうかどうか、高分解能到達可能かどうかを判断するためです。
-
-「え？おれunblur 使ってるんだけど」「ctffind4の方が良くない？」
-という声があるかもしれませんが、このプログラムはあくまでもMotionCor2を速攻やって、ついでに２次元平均までを最速でやって状況判断する！がコンセプトです。
-本格的な解析については、各々好きなプログラムを使用して、自分のGPGPUなどを使ってゆっくりやってください。
-
-また、ユーザが二次元平均像から三次元再構成がうまく行きそうかどうか判断できるという前提にも立っています。
-項目「判断に必要な枚数」で何枚ぐらいあればいいかをコメントしていますが、詳細については論文を書いている途中なので、もう少しお待ち下さい。
-
-## 準備する物
-
-K2やダイレクトディテクターなどを制御しているクライオ電顕用PCに光ファイバーやギガビットイーサネットを介して接続しているGPGPUを準備してください。
-linux (ubuntuかcentOS)が載せてあれば動作可能で、GPUは二台以上積んであることが望ましいです。
-また、K2の場合は４つの光ファイバーのポートの内、一つが余っています。それを有効活用することをオススメします。
+## Overview
+This software is a python program developed for electron cryomicroscope (cryoEM) users collecting data for single-particle image analysis. 
 
 
-## GPGPUに接続するHDDについて
+The function is very simple,
 
-私たちの場合、HDDを直接GPGPUに接続し（裸◯のお立ち台などのHDDスタンドで）、sambaサーバを介して、クライオ電顕用PCとGPGPU用PCの両方からアクセス出来るように設定しています。 また、撮影した電顕写真は直接このHDDにコピーされるように設定しています。
+-  It watches a directory and performs MotionCor 2 and Gctf immediately after image data transfer (or for existing stack files).
+-  When any number of images you preset is reached, Gautomatch, Particle extraction (By Relion2), and 2D-classification (By Relion2) are performed.
 
-## インストールに必要なもの
-以下の単粒子像解析用プログラム（必ずGPUで動作することを確認ください）
+This is an On-the-fly Pipeline program that runs at once.
+
+The aim of this software development is to offer a quickest way to determine whether the three-dimensional (3D) reconstruction will go smoothly and whether the image analysis will lead to high resolution.
+
+While there may be a voice of "HUH? I want to use other motion correction program." "Isn't ctffind4 better?", the purpose of this program is just to speed up the preprocessing by MotionCor 2 and make two-dimensional (2D) class averages as quickly as possible. This is the main concept of this software. Please use your favorite programs for actual image analysis later using your GPGPU.
+
+It is also assumed that the user is able to judge whether the 3D reconstruction would be successful from the 2D class average images. I commented on how many images we should have for the "Number required for judgment", but please wait for a while for more detailed information until I finish writing up a paper.
+
+## Preparations
+
+Prepare a GPGPU system connected via optical fiber or Gigabit Ethernet to the microscope PC that controls Gatan K2 or other direct electron detector cameras. This software works if Linux (ubuntu or CentOS) runs on the PC. It is desirable to have more than two GPUs. In case of Gatan K2, one of the four optical fiber ports is available for connection. I recommend to use it effectively.
+
+## About the Hard Disk Drive (HDD) connected to GPGPU
+
+In our case, we connect HDD directly to GPGPU (At a hard drive stand) and configure it to access both the microscope PC and GPGPU via a samba server. In addition, the captured CryoEM images are set to be copied directly to this HDD.
+
+## What is required for installation
+
+The following single particle image analysis programs (Be sure to work with GPU)
 ```
 MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 ```
 
-- 必ずかれらの使用規約およびライセンスに則り使用してください
-- MotionCor2,Gautomatch,Gctfについては、シェルから”MotionCor2”,”Gautomatch”,”Gctf”で呼び出せるようにパスもしくはエイリアスを通してください。
+- My program wraps these programs.
+- Be sure to use them in accordance with their terms of use and license.
+#### IMPORTANT!!
+- For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gcf".
 
-## 必要なpythonライブラリ (動作確認はUbuntu, CentOSでのみ):
+
+## Required python libraries (Only Ubuntu and CentOS confirmed):
 ```
 python3, watchdog, pyqt5, numpy
 ```
 
-### Ubuntuでのインストールについて(pip経由、16.04は確認済み)
-1. Python3のインストール
-2. default (python3.5)
-Pipのインストール
+
+### About Installing in Ubuntu (16.04 confirmed via pip)
+1. Installing Python3
+2. default (python 3.5) 
+Installing Pip
 ```
 $ sudo apt-get install python3-dev python3-pip
 ```
 
-Pipのアップグレード
+Upgrade Pip
 ```
 $ sudo python3 -m pip install —upgrade pip
 ```
 
-numpyのインストール
+Installing numpy
 ```
 $ sudo python3 -m pip install numpy
 ```
 
-watchdogのインストール
+Installing watchdog
 ```
  $ sudo python3 -m pip install watchdog
 ```
 
-Pyqt5のインストール
+Installing Pyqt5
 ```
 $ sudo  python3 -m pip install pyqt5
 ```
 
-
-### centOSでのインストールについて(pip経由、7は確認済み、6は下記コメントを参照)
-1. python3.6のインストール
+### Installing in the CentOS (Confirmed 7 via pip, 6 See comments below)
+1.Install python 3.6
 ```
 $ sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 $ sudo yum search python36
 $ sudo yum install python36u python36u-libs python36u-devel python36u-pip
 ```
 
-Pyqt5のインストール
+
+Install Pyqt5
 ```
 $python3.6 -m pip install pyqt5
 ```
 
-watchdogのインストール
+Install watchdog
 ```
 $python3.6 -m pip install watchdog
 ```
 
-Numpyのインストール
+Install Numpy
 ```
 $python3.6 -m pip install numpy
 ```
 
-#### centOS6でのインストールについて(Yさんからのコメント)
+#### Installing in CentOS 6 (Comments from Mr. Y)
 
+I received the following comment. 
 ```
-CentOS6環境では，pipで入れるとpyqt5がglibcの新しい版(glibc 2.17以上)に依存しており
-動かない
+In the CentOS 6 environment, Gwatch did not work because pyqt5 is dependent on the new version of glibc (glibc 2.17 or higher)
 ```
-というコメントを頂きました。
-以下のサイトでglibcを更新することでpyqt5が動くようになります。
-https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
+Pyqt5 will work by updating glibc at the following site: https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
 
 
-## インストール方法
-1. Gwatch.pyをダウンロード
-2. 解凍したフォルダにパスを通す。
 
-## Gwatchの使い方と機能について
+## Installation 
+1. Download Gwatch (git clone git://github.com/FumiakiMakino/Gwatch.git)
+2. Pass the path to the extracted folder
+- IMPORTANT!! For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gcf".
 
-コンソールを立ち上げて、```Gwatch_v32.py``` と打ち込む。
+## About Gwatch Usage and Features
 
- ### Automatic MotionCor2について
- 1. “Watching Directory”について。データがコピーされるディレクトリを選ぶ
- 2. “Watching File Name”について。ファイルの名前を打ち込む。このとき、ワイルドカードを使って名前を指定すること（例：*.mrc, *.tiffなど）
-（tiffもしくはmrc以外でのセーブは非推奨）
- 3. “Number of Frame”について。枚数の指定。シングルイメージとしてセーブされるデータに対してのみ有効。規定枚数に達したらnewstackでスタックデータを作成し、MotionCor2を起動します。（シングルイメージでのセーブは非推奨）
- 4. “Do Gain-reference?” について。Gain referenceを使った補正をMotionCor2で行いたい場合はここで指定すること。YESを選んだら、”Name of Gain-Reference”からファイルを選ぶ。拡張子dm4のデータも自動で変換します。変換後は監視フォルダにgain.mrcとして保存される。
- 5. “Do Measure Ice-thickness ratio?”について。YESを選ぶとエナジーフィルター有り無しの割合がmicrograph_all_gwatch.starの_rlnEnergyLossの行に記録される。その際、フィルターなしで撮影したファイルを”Name of Image without energy filter”のbrowseから一枚選ぶこと。ここではヘッダーに記録された強度から割合を求めている。
- 6. “Additinal Option For MotionCor2”について。MotionCor2のオプションを入力する項目。inputとoutput、もしくはreference gain以外に必要な項目はすべてここに入力すること。-pixsizeも同様であるが、下に項目があるpixel sizeとは連動している。
- 7. “Which GPUs”について。ここで使用するGPUを指定する。指定しない場合は1つのみ仕様。また、MotionCorr2使用時には,1 process毎に1GPUを割当る。最大に同時で4 process 4 GPUで計算するようにしています。なぜなら、そのほうが速いから！ 
- 8. “Pixel Size”,”Cs”,”Acceleration Voltage”について。ここではGctfを計算する上で必要な数値を入力すること。ここを変更すると上記のMotionCor2のオプションと連動する。
+Launch the console and enter ```Gwatch_v32.py``` 
 
-### Automatic 2D-classificationについて
- 1. "Calculate 2D classification?”について。YESを選択すると、設定した枚数に達したら二次元平均像までを行う。計算に必要な各種パラメータが入力可能となるので、必ず入力すること。結果は、Relionのdisplayを利用しポップアップされ、Class2D/job000_01、Extract/job000_01に格納される。
- 2. “Calculate 2D classification every batch?”について。YESを選択すると、設定した枚数に達し次第、繰り返し二次元平均像までの計算を行う。結果は、Relionのdisplayを利用しポップアップされ、Class2D/job000_01,02… Extract/job000_01,02…と格納される。
- 3. “How many Micrographs use to calculate?”について。二次元平均像を計算するときの枚数。10-50枚程度が望ましい。
- 4. “Particle Diameter “について。Gautomatchで粒子をピックアップするときに必要な値。直径より小さいと多く拾うが、ゴミも多く、大きいと取り逃がすこともあるが正確に拾う傾向がある。楕円状の場合は長軸の大きさに合わすとよい思われる。
- 5. “Binning”について。粒子像の抽出や二次元平均像の計算の際に適用される。ピクセルサイズによるが、counting modeだと2、super resolution modeだと4程度が望ましい。
- 6. “Run”と”Cancel”について。”Run”を押すとGwatchが動く。後追いで解析可能なので、すでに数十枚取った状態からでも計算可能。また、計算がコケた場合は立ち上げ直して再度”Run”を押すと続きから計算する。この際、watching directoryは再度選び直すこと。
- ”Cancel”は計算をやめる。途中MotionCor2などが走っている場合は、その計算は投げ出される状態で終了する。
+## About Automatic MotionCor2
+1. For "Watching Directory", select the directory where data is copied
+2. For "Watching File Name", enter the name of the file. If you use wildcards to specify a name, or when the stack is in the mrc format, you should be careful that MotionCor2 starts recursively with the "*.mrc" to limit file names  (Example: file????.mrc, *.tiff, etc.) I do not recommend to use it except ".mrc" and ".tif"
+3. For "Number of Frame", specify the number of sheets. Only valid for data saved as a single image. When the specified number is reached, create stack data with newstack and start MotionCor2. (I do not recommend to save them in single images because it is slow due to stack making procedure!)
+4. "Do Gain-reference?": If you want to use Gain-reference in MotionCor2, select YES and select a file from the "Name of Gain-Reference". The data for the extension dm4 is also automatically converted. After conversion, it is saved as "gain.mrc" in the monitoring folder.
+5. "Do Measure Ice?": If YES, the percentage of electron transmission with/without the energy filter is recorded in the _rlnEneryLoss row of micrograph_all_ gwatch.star.  In that case, choose a file from the "Name of Image without energy filter" file that you recorded the image without filtering. Here, the ratio is determined from the intensity recorded in the header.
+6. "Additional Option For MotionCor2": This allows you to enter options for MotionCor2. Input all necessary items other than input and output or gain reference.
+7. "Which GPUs": Specify the GPU used here. Only one specification if not specified. In addition, when MotionCorr2 is used, one GPU is allocated per one process. The maximum is four processes on four GPUs. Why? Because it is faster!
+8. For "Pixel Size", "Cs", "Acceleration Voltage", enter the numbers required for calculating Gcf. If you change these, it works with the MotionCor 2 option above.
 
-micrograph_all_gwatch.starとして、relionで利用可能な形で出力される。
-この形式はGctfでの計算結果とほぼ同様である。
+### About Automatic 2D-classification
 
-### タブ Results について
-MotionCor2およびGctfの結果はmicrograph_all_gwatch.starから読み込み。
-`“Defocus_U  Defocus_V  Angle   FoM  RationOfIcethinkness”` の順に[Results of MotionCor2 and Gctf]に表示
-2D-classification実行時のコマンドラインは
+1. For "Calculate 2D classification?", when YES is selected, 2D class average is performed with Relion2 when the preset number of images is reached in the folder. The parameters required for calculation can be typed in here. So you must enter them. The results are popped up using the Relion display and stored in Class2D/job000_01, Extract/job000_01.
+2. "Calculate 2D classification every batch?": When YES is selected, the calculation for the 2D class average is repeatedly carried out when the preset number of images is reached in the folder. The results are popped up using the Relion display and stored in Class 2D / job000_01, 02... Extract/job000_01, 02....
+3. "How hard Micrographs use to calculate?": The number of copies of the 2D class average image. About 10 -50 sheets are desirable.
+4. "Particle Diameter": This is the value required to pick up particles by Gautomatch. If this is set smaller than the particle diameter, it will pick up many, but there will be a lot of garbage. It seems to be good to match the size of the long axis for particles with an elliptical shape.
+5. "Binning": This is applied when the particle images are extracted, and the 2D class average is calculated. Although it depends on the pixel size, it is preferable to set the number to 2 for the data collected in the counting mode and to 4 for those collected in the super resolution mode.
+6. "Run" and "Cancel": Press "Run" button to start Gwatch.
+Gwatch can run offline. Therefore it is possible to calculate it after several dozen images are collected. If the calculation failed, set it up again and press “Run ”. You need to select the watching directory again. "Cancel" button stops calculation. If MotionCor2 is running, the calculation will be continued.
 
-[Commands For Auomatic 2D-classificaiton]で確認できる。また、監視ディレクトリ下のgwatch_cmd01.logに記録される
-その他状況は
+The result will be available for Relion as micrographs_all_gwatch.star. This format is almost the same as that in Gcf.
 
-[status]で確認できる。それぞれのプログラムのエラーは赤文字表示される。
+### About Tabs Results
+The results of MotionCor2 and Gcf are read from micrograph_all_gwatch.star and display in [Results of MotionCor 2 and Gcf] in the order of `"Defocus_U Defus_V Angle FoM RationOfIcethinkness"`
 
-### settingファイルのsaveとopen
-MotionCor2やGctf, Relion2の設定はsave settingを選ぶと記録されます。(defaultでは~/.Gwatch_settingに実行時に直近の設定がセーブされる)
-呼び出しはopen settingから行えます。
+ The command lines at the 2D-classification runtime are displayed in [Commands For Auomatic 2D-classificaiton] and are recorded in gwatch_cmd01.log
+ 
+Other statuses of the process are displayed in [status] 
+The error in each program is displayed in red.
 
-## 現在の問題点と解決策
-- エラーで起動しない → ライブラリのインストールを確認。それでもダメなら、"rm -rf ~/.Gwatch_setting”で初期settingファイルの消去
-- たまに落ちる　→　Gwatchの再起動で解決
-- MotionCor2がうまく行かない　→ データのコピーが終了せずに実行した可能性がある。
-`Gwatch_v32.py -t <#time>` で起動する。
+### Save and open in the setting file
 
-<#time>は秒数、10などに設定するとよい。なぜなら、Gwatchはファイルの読み込み終了をファイルの増減を監視し判断しているため。インターバルタイムはdefaultだと5 secだが、10 secなど長く設定すると安全にコピー終了まで待つことができると考えられる。
+The settings for MotionCor2, Gcf, and Relon2 are recorded when save setting is selected. 
+(The default is ~ / .Gwatch_setting in default.) You can open the setting file from open setting.
 
-## 今後実装予定の機能
- 1. それぞれのプログラムへのパスの指定(2018年4月中)
- 2. ネットを介した起動と結果の表示。GUIの変更およびシステムの変更(2018年6月中)
- 3. 機械学習もしくはdeep learningを使った判断(未定)
+## Current Problems and Solutions
 
-## 判断に必要な枚数
-10-50枚、粒子数になおすと3,000-5,000個が最終的にピックアップ出来れば判断に必要十分な量だと思います。（論文執筆中）
-二次元平均像のなかに二次構造が見えるような像があれば、おそらくうまく行きます。自信をもって取れるだけ取ってください!
-最後にネバーギブアップの精神でよりよりサンプル作りを頑張ってください。
+- Do Not Launch → Verify library installation. If not, remove the initial setting file with "rm-rf ~ / .Gwatch _ setting" 
+- Crash occasionally → Restart Gwatch, start from continuation
+- MotionCor 2 does not work→ it is possible that the data transfer failed. Start with Gwatch _ v 32 .py -t <# time>.
 
-## Topics
-JADASやSerialEMはtiffでsaveの際にオプションでlzwでの圧縮が可能です。これを利用すると1/4~1/5まで圧縮され、かつ最新のMotionCor2でそのまま利用できます。
+<# time> should be set in seconds, such as 10 or 15. Although the default interval time is 5 seconds by default, since Gwatch monitors the increment of the file size, it would be safer to set a longer waiting time for completion of the data copy .
 
-## 問い合わせ
-もし、質問、要望、共同研究の申し出があればこちらまで　`h1839<at>fbs.osaka-u.ac.jp`
+## Future implementation features
+
+Display and display results via the net. Changing the GUI and the System (June 2018)
+Automatic judgment of data quality using machine learning or deep learning (TBD)
+
+
+## Number of cryoEM images required for judgment of data quality
+
+About 10 to 50 images that would allow 3,000-5,000 particle images to be picked up would be sufficient to make a judgement on the data quality (Writing papers). If there are 2D class average images showing the secondary structures of proteins, the images are good and the image analysis will probably go well. Then, just continue collecting data with confidence until your cryoEM machine time runs out! Otherwise, keep trying to make better samples with the spirit of “Never Give Up”.
+
+## Question
+If you have a question, request, h1839 <at> fbs.osaka-u.ac.jp
+
 
 
 
