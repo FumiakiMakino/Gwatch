@@ -36,7 +36,7 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 - My program wraps these programs.
 - Be sure to use them in accordance with their terms of use and license.
 #### IMPORTANT!!
-- For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gcf".
+- For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 
 ## Required python libraries (Only Ubuntu and CentOS confirmed):
@@ -110,7 +110,7 @@ Pyqt5 will work by updating glibc at the following site: https://gist.github.com
 ## Installation 
 1. Download Gwatch (git clone git://github.com/FumiakiMakino/Gwatch.git)
 2. Pass the path to the extracted folder
-- IMPORTANT!! For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gcf".
+- IMPORTANT!! For MotionCor2, Gautomatch, and Gcf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 ## About Gwatch Usage and Features
 
