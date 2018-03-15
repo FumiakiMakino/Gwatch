@@ -46,9 +46,7 @@ python3, watchdog, pyqt5, numpy
 
 
 ### About Installing in Ubuntu (16.04 confirmed via pip)
-1. Installing Python3
-2. default (python 3.5) 
-Installing Pip
+1. Installing Python3 and Pip
 ```
 $ sudo apt-get install python3-dev python3-pip
 ```
