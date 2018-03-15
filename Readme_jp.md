@@ -45,9 +45,7 @@ python3, watchdog, pyqt5, numpy
 ```
 
 ### Ubuntuでのインストールについて(pip経由、16.04は確認済み)
-1. Python3のインストール
-2. default (python3.5)
-Pipのインストール
+Python3のインストール　と　Pipのインストール
 ```
 $ sudo apt-get install python3-dev python3-pip
 ```
