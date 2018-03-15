@@ -118,7 +118,7 @@ Launch the console and enter ```Gwatch_v32.py```
 
 ## About Automatic MotionCor2
 1. For "Watching Directory", select the directory where data is copied
-2. For "Watching File Name", enter the name of the file. You should use wildcards to specify a name and format,  (Example: *.mrc,*.mrcs, *.tif, *.tiff) I do not recommend to use it except ".mrc",".mrcs",".tif" and ".tiff"
+2. For "Watching File Name", enter the name of the file. You should use wildcards to specify a name and format,  (Example: *.mrc, *.mrcs, *.tif, *.tiff) I do not recommend to use it except ".mrc",".mrcs",".tif" and ".tiff"
 3. For "Number of Frame", specify the number of sheets. Only valid for data saved as a single image. When the specified number is reached, create stack data with newstack and start MotionCor2. (I do not recommend to save them in single images because it is slow due to stack making procedure!)
 4. "Do Gain-reference?": If you want to use Gain-reference in MotionCor2, select YES and select a file from the "Name of Gain-Reference". The data for the extension dm4 is also automatically converted. After conversion, it is saved as "gain.mrc" in the monitoring folder.
 5. "Do Measure Ice?": If YES, the percentage of electron transmission with/without the energy filter is recorded in the _rlnEneryLoss row of micrograph_all_ gwatch.star.  In that case, choose a file from the "Name of Image without energy filter" file that you recorded the image without filtering. Here, the ratio is determined from the intensity recorded in the header.
