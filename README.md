@@ -46,7 +46,7 @@ python3, watchdog, pyqt5, numpy
 
 
 ### About Installing in Ubuntu (16.04 confirmed via pip)
-1. Installing Python3 and Pip
+Installing Python3 and Pip
 ```
 $ sudo apt-get install python3-dev python3-pip
 ```
@@ -72,7 +72,7 @@ $ sudo  python3 -m pip install pyqt5
 ```
 
 ### Installing in the CentOS (Confirmed 7 via pip, 6 See comments below)
-1.Install python 3.6
+Install python 3.6
 ```
 $ sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 $ sudo yum search python36
