@@ -106,9 +106,10 @@ Pyqt5 will work by updating glibc at the following site: https://gist.github.com
 
 
 ## Installation 
-1. Download Gwatch (git clone git://github.com/FumiakiMakino/Gwatch.git)
+1. Download Gwatch ```git clone git://github.com/FumiakiMakino/Gwatch.git```
 2. Pass the path to the extracted folder
-- IMPORTANT!! For MotionCor2, Gautomatch, and Gctf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
+- IMPORTANT!!  
+For MotionCor2, Gautomatch, and Gctf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 ## About Gwatch Usage and Features
 
