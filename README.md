@@ -164,6 +164,8 @@ Display and display results via the net. Changing the GUI and the System (June 2
 Automatic judgment of data quality using machine learning or deep learning (TBD)
 
 
+
+
 ## Number of cryoEM images required for judgment of data quality
 
 About 10 to 50 images that would allow 3,000-5,000 particle images to be picked up would be sufficient to make a judgement on the data quality (Writing papers). If there are 2D class average images showing the secondary structures of proteins, the images are good and the image analysis will probably go well. Then, just continue collecting data with confidence until your cryoEM machine time runs out! Otherwise, keep trying to make better samples with the spirit of “Never Give Up”.
