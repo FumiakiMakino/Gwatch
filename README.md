@@ -1,6 +1,8 @@
 # Gwatch
 Gwatch: a pipeline program for quick evaluation of sample quality in CryoEM 
 
+このソフトは、単粒子像解析のためのデータ収集を行うクライオ電顕ユーザ用に開発したpythonプログラムです。日本語での説明は[こちら](https://github.com/FumiakiMakino/Gwatch/blob/master/Readme_jp.md)を参照してください。
+
 ## Overview
 This software is a python program developed for electron cryomicroscope (cryoEM) users collecting data for single-particle image analysis. 
 
