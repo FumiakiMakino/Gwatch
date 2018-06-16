@@ -203,11 +203,11 @@ def cal_2dcls(diameter, apix, kv, cs, binn, num, cmd2dcls):
 
     #Particle extract, particles are  binning here
     cmd3rd0="mkdir -p Extract/job000_%02d/"%(num_bat) 
-    cmd3rd="`which relion_preprocess` --i micrographs_all_gwatch%02d.star --coord_dir ./ --coord_suffix _automatch.star --part_star Extract/job000_%02d/particles.star --part_dir Extract/job000_%02d/ --extract --extract_size %d --scale %d --norm --bg_radius %d --white_dust -1 --black_dust -1 --invert_contrast 1> Extract/job000_%02d/run.out 2> Extract/job000_%02d/run.err"%(num_bat,num_bat,num_bat,box_size,box_size/bin,int(box_size/bin*0.75/2),num_bat)
+    cmd3rd="`which relion_preprocess` --i micrographs_all_gwatch%02d.star --coord_dir ./ --coord_suffix _automatch.star --part_star Extract/job000_%02d/particles.star --part_dir Extract/job000_%02d/ --extract --extract_size %d --scale %d --norm --bg_radius %d --white_dust -1 --black_dust -1 --invert_contrast 1> Extract/job000_%02d/run.out 2> Extract/job000_%02d/run.err"%(num_bat,num_bat,num_bat,box_size,box_size/bin,int(box_size/bin*0.75/2),num_bat,num_bat)
 
     #2D classification
     cmd4th0="mkdir -p Class2D/job000_%02d/"%(num_bat)
-    cmd4th="mpirun -np %d `which relion_refine_mpi` --o Class2D/job000_%02d/run --i Extract/job000_%02d/particles.star --particle_diameter %d  %s 1> Class2D/job000_%02d/run.out 2> Class2D/job000_%02d/run.err"%(len(list4gpu)+1,num_bat,num_bat,(int(diameter*1.4)),cmd2dcls,num_bat) 
+    cmd4th="mpirun -np %d `which relion_refine_mpi` --o Class2D/job000_%02d/run --i Extract/job000_%02d/particles.star --particle_diameter %d  %s 1> Class2D/job000_%02d/run.out 2> Class2D/job000_%02d/run.err"%(len(list4gpu)+1,num_bat,num_bat,(int(diameter*1.4)),cmd2dcls,num_bat,num_bat) 
 
     #See picking up paritcle in Relion2
     cmd5th0="mkdir -p ManualPick/job000_%02d/"%(num_bat) 
@@ -452,7 +452,7 @@ def cal_mot2(command,num,diameter,apix,kv,cs,frames,binn,cmdgctf,cmd2dcls):
 
             if (c_extnum==frames):   #In the case of finishing data reading
                 if not os.path.isfile("%s_SumCor.mrc"%(c_name)): #working in only new file
-                    cmd_new="newstack %s* %s.mrc"%(c_name,c_name)
+                    cmd_new="e2proc2d.py %s* %s.mrc"%(c_name,c_name)
                     subprocess.check_call(cmd_new,shell=True)
                     fname=c_name
                     flg_single=0
@@ -465,7 +465,7 @@ def cal_mot2(command,num,diameter,apix,kv,cs,frames,binn,cmdgctf,cmd2dcls):
             myapp.report_result_status("Done MotionCor2 and Gctf ==> %s"%(fname.split("/")[-1]),0)
         if not os.path.isfile("%s_SumCor.mrc"%(getwholename(fname))) and flg_single == 0:  #working in only new file
             if ((str(getext(fname)) != ".mrc") and (str(getext(fname)) != ".mrcs") and  (str(getext(fname)) != ".tiff") and (str(getext(fname)) != ".tif")):
-                cmd_trs="newstack %s %s.mrcs"%(fname,getwholename(fname))
+                cmd_trs="e2proc2d.py %s %s.mrcs"%(fname,getwholename(fname))
                 #cmd_rm="rm %s"%(event.src_path) #remove original image stack
                 subprocess.check_call(cmd_trs,shell=True)
                 print("Finished %s "%cmd_trs)
@@ -763,7 +763,6 @@ class MyForm(QMainWindow):
         QMessageBox.information(self, "About Watching File name", str("Set a File name \n"
                                                                       "This program runs on a stack/singles of frame data of movie mode."
                                                                       "You can use any file extension (e.g. .dm4, etc)."
-                                                                      "This program automaticaly convert the file to mrc-file with  Newstack module in IMOD."
                                                                       "Strongly recommand use question marks for filename characters used for numbering images in digits, e.g. mrc_????.mrc, mrc_????_????.mrc in singles's case\n"))
 
     def message_num_of_fra(self):
