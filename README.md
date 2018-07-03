@@ -41,11 +41,12 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 - For MotionCor2, Gautomatch, and Gctf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 
-## Required python libraries (Only Ubuntu and CentOS confirmed):
+## Required python libraries (Only [Ubuntu]() and [CentOS]() confirmed):
 ```
 python3, watchdog, pyqt5, numpy
 ```
 
+<div id="ubuntu">
 
 ### About Installing in Ubuntu (16.04 confirmed via pip)
 Installing Python3 and Pip
@@ -73,6 +74,10 @@ Installing Pyqt5
 $ sudo  python3 -m pip install pyqt5
 ```
 
+</div>
+
+<div id="centos">
+
 ### Installing in the CentOS (Confirmed 7 via pip, 6 See comments below)
 Install python 3.6
 ```
@@ -96,6 +101,8 @@ Install Numpy
 ```
 $python3.6 -m pip install numpy
 ```
+
+</div>
 
 #### Installing in CentOS 6 (Comments from Mr. Y)
 
