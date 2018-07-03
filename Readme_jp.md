@@ -39,7 +39,7 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 - 必ずかれらの使用規約およびライセンスに則り使用してください
 - MotionCor2,Gautomatch,Gctfについては、シェルから”MotionCor2”,”Gautomatch”,”Gctf”で呼び出せるようにパスもしくはエイリアスを通してください。
 
-## 必要なpythonライブラリ (動作確認はUbuntu, CentOSでのみ):
+## 必要なpythonライブラリ (動作確認は[Ubuntu](#ubuntu), [CentOS](#centos)でのみ):
 
 Linuxの環境がUbuntuの場合は[こちら](#ubuntu)、CentOSの場合は[こちら](#centos)
 
