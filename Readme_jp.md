@@ -47,6 +47,7 @@ Linuxの環境がUbuntuの場合は[こちら](#ubuntu)、CentOSの場合は[こ
 python3, watchdog, pyqt5, numpy
 ```
 <div id="ubuntu">
+ 
 ### Ubuntuでのインストールについて(pip経由、16.04は確認済み)
 Python3のインストール　と　Pipのインストール
 ```
@@ -73,7 +74,9 @@ Pyqt5のインストール
 $ sudo  python3 -m pip install pyqt5
 ```
 </div>
+
 <div id="centos">
+ 
 ### centOSでのインストールについて(pip経由、7は確認済み、6は下記コメントを参照)
 python3.6のインストール
 ```
