@@ -87,17 +87,17 @@ $ sudo yum install python36u python36u-libs python36u-devel python36u-pip
 
 Pyqt5のインストール
 ```
-$python3.6 -m pip install pyqt5
+$sudo python3.6 -m pip install pyqt5
 ```
 
 watchdogのインストール
 ```
-$python3.6 -m pip install watchdog
+$sudo python3.6 -m pip install watchdog
 ```
 
 Numpyのインストール
 ```
-$python3.6 -m pip install numpy
+$sudo python3.6 -m pip install numpy
 ```
 
 #### centOS6でのインストールについて(Yさんからのコメント)
