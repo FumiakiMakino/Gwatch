@@ -40,6 +40,9 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 - MotionCor2,Gautomatch,Gctfについては、シェルから”MotionCor2”,”Gautomatch”,”Gctf”で呼び出せるようにパスもしくはエイリアスを通してください。
 
 ## 必要なpythonライブラリ (動作確認はUbuntu, CentOSでのみ):
+
+Linuxの環境がUbuntuの場合は[こちら](https://github.com/FumiakiMakino/Gwatch/edit/master/Readme_jp.md#L50)、CentOSの場合は[こちら](https://github.com/FumiakiMakino/Gwatch/edit/master/Readme_jp.md#77)
+
 ```
 python3, watchdog, pyqt5, numpy
 ```
