@@ -41,12 +41,12 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 
 ## 必要なpythonライブラリ (動作確認はUbuntu, CentOSでのみ):
 
-Linuxの環境がUbuntuの場合は[こちら](###Ubuntuでのインストールについて(pip経由、16.04は確認済み)、CentOSの場合は[こちら](###centOSでのインストールについて(pip経由、7は確認済み、6は下記コメントを参照))
+Linuxの環境がUbuntuの場合は[こちら](#ubuntu)、CentOSの場合は[こちら](#centos)
 
 ```
 python3, watchdog, pyqt5, numpy
 ```
-
+<div id="ubuntu">
 ### Ubuntuでのインストールについて(pip経由、16.04は確認済み)
 Python3のインストール　と　Pipのインストール
 ```
@@ -72,8 +72,8 @@ Pyqt5のインストール
 ```
 $ sudo  python3 -m pip install pyqt5
 ```
-
-
+</div>
+<div id="centos">
 ### centOSでのインストールについて(pip経由、7は確認済み、6は下記コメントを参照)
 python3.6のインストール
 ```
@@ -107,6 +107,7 @@ CentOS6環境では，pipで入れるとpyqt5がglibcの新しい版(glibc 2.17�
 以下のサイトでglibcを更新することでpyqt5が動くようになります。
 https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
 
+</div>
 
 ## インストール方法
 1. Gwatch.pyをダウンロード  
