@@ -41,7 +41,7 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 
 ## 必要なpythonライブラリ (動作確認はUbuntu, CentOSでのみ):
 
-Linuxの環境がUbuntuの場合は[こちら](https://github.com/FumiakiMakino/Gwatch/blob/master/Readme_jp.md#L50)、CentOSの場合は[こちら](https://github.com/FumiakiMakino/Gwatch/blob/master/Readme_jp.md#77)
+Linuxの環境がUbuntuの場合は[こちら](###Ubuntuでのインストールについて(pip経由、16.04は確認済み)、CentOSの場合は[こちら](###centOSでのインストールについて(pip経由、7は確認済み、6は下記コメントを参照))
 
 ```
 python3, watchdog, pyqt5, numpy
