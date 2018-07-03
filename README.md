@@ -41,7 +41,7 @@ MotionCor2, Gctf, Gautomatch, eman2, IMOD, Relion2
 - For MotionCor2, Gautomatch, and Gctf, pass the path or alias from the shell to "MotionCor2", "Gautomatch", "Gctf".
 
 
-## Required python libraries (Only [Ubuntu]() and [CentOS]() confirmed):
+## Required python libraries (Only [Ubuntu](#ubuntu) and [CentOS](#centos) confirmed):
 ```
 python3, watchdog, pyqt5, numpy
 ```
