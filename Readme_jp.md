@@ -115,7 +115,7 @@ https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174
 ## インストール方法
 1. Gwatch.pyをダウンロード  
 ```
-git clone git://github.com/FumiakiMakino/Gwatch.git)
+git clone git://github.com/FumiakiMakino/Gwatch.git
 ```
 
 2. 解凍したフォルダにパスを通す。
