@@ -169,7 +169,7 @@ def cal_2dcls(diameter, apix, kv, cs, binn, num, cmd2dcls):
         print("Error! loading %s/micrographs_all_gwatch.star"%path)
         print("Cannot calculate 2D classification!")
         myapp.report_result_status("Error! cannot loading %s/micrographs_all_gwatch.star"%path,1)
-        myapp.report_result_status("Check number of micrographs which have been done MotionCor2 and micrographs_all_gwatch.star"%path,1)
+        myapp.report_result_status("Check number of micrographs which have been done MotionCor2 and micrographs_all_gwatch.star",1)
         myapp.report_result_status("Cannot calculate 2D classification!",1)
         return 
 
