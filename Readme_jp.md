@@ -124,10 +124,12 @@ git clone git://github.com/FumiakiMakino/Gwatch.git
 ```
 
 2. 解凍したフォルダにパスを通す。
-例： /optにGwatchをダウンロードした場合
+
+例： bashを使用し、/optにGwatchをダウンロードした場合
 ```
 PATH = $PATH:/opt/Gwatch/Gwatch_project_v323
 ```
+この行を~/.bash_profileに追加する
 
 - IMPORTANT!! MotionCor2,Gautomatch,Gctfについては、シェルから”MotionCor2”,”Gautomatch”,”Gctf”で呼び出せるようにパスもしくはエイリアスを通してください。
 
