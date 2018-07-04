@@ -85,6 +85,11 @@ $ sudo yum search python36
 $ sudo yum install python36u python36u-libs python36u-devel python36u-pip
 ```
 
+python3のシンボリックリンクの作成(python3.6のインストールだけではpython3のシンボリックリンクが作成されないため)
+```
+$ sudo ln -s /usr/bin/python3.6 /usr/bin/python3
+```
+
 Pyqt5のインストール
 ```
 $sudo python3.6 -m pip install pyqt5
@@ -119,6 +124,11 @@ git clone git://github.com/FumiakiMakino/Gwatch.git
 ```
 
 2. 解凍したフォルダにパスを通す。
+例： /optにGwatchをダウンロードした場合
+```
+PATH = $PATH:/opt/Gwatch/Gwatch_project_v323
+```
+
 - IMPORTANT!! MotionCor2,Gautomatch,Gctfについては、シェルから”MotionCor2”,”Gautomatch”,”Gctf”で呼び出せるようにパスもしくはエイリアスを通してください。
 
 
